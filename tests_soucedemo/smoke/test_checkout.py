@@ -15,9 +15,9 @@ def teardown_module(module):
 
 
 @pytest.mark.usefixtures('my_webdriver')
-class TestLogin:
+class TestCheckout:
 
-    @pytest.mark.usefixtures('scope_function_default')
+    @pytest.mark.usefixtures('instantiate_pages')
     def test_checkout(self):
         """
         Test checkout on https://www.saucedemo.com
@@ -25,5 +25,5 @@ class TestLogin:
         """
         LOGGER.info("$$$$$$$$$$$$$$$$$$$$$$ Checkout Test login started")
         self.login = Login(self.my_webdriver)
-        self.login.fill_fields()
+        self.instantiate_pages.fill_fields()
 

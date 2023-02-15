@@ -42,12 +42,12 @@ def teardown_module(module):
 #     LOGGER.info("Teardown test executed - default scope function")
 
 
-# @pytest.mark.usefixtures('my_webdriver')
+@pytest.mark.usefixtures('driver')
 class TestLogin:
     attr_class = "Buhaha"
 
     @pytest.mark.usefixtures('scope_function_default')
-    def test_login_success(self, my_webdriver ):
+    def test_login_success(self):
         """
         Test succesfull login on https://www.saucedemo.com
         :return:
@@ -57,8 +57,9 @@ class TestLogin:
         LOGGER.error("Logger ERROR")
         LOGGER.critical("Logger CRITICAL")
         LOGGER.debug("Logger DEBUG")
-        self.my_webdriver.get("https://www.saucedemo.com")
-        # self.driver.find_element(By.XPATH, "//input[@id='user-name']").clear()
+        # self.driver = self.my_
+        self.driver.get("https://www.saucedemo.com")
+        self.driver.find_element(By.XPATH, "//input[@id='user-name']").clear()
         # self.driver.find_element(By.XPATH, "//input[@id='user-name']").send_keys("standard_user")
         #
         # self.driver.find_element(By.XPATH, "//input[@id='password']").clear()
@@ -77,12 +78,12 @@ class TestLogin:
         """
         LOGGER.info("$$$$$$$$$$$$$$$$$$$$$$ INFOTest login FAIL started")
 
-        self.my_webdriver.get("https://www.saucedemo.com")
-        # self.driver.find_element(By.XPATH, "//input[@id='user-name']").clear()
-        # self.driver.find_element(By.XPATH, "//input[@id='user-name']").send_keys("standard_user")
-        #
-        # self.driver.find_element(By.XPATH, "//input[@id='password']").clear()
-        # self.driver.find_element(By.XPATH, "//input[@id='password']").send_keys("wrong_pass")
-        #
-        # LOGGER.info("Click login button")
-        # self.driver.find_element(By.XPATH, "//input[@id='login-button']").click()
+        # self.my_webdriver.get("https://www.saucedemo.com")
+        self.driver.find_element(By.XPATH, "//input[@id='user-name']").clear()
+        self.driver.find_element(By.XPATH, "//input[@id='user-name']").send_keys("standard_user")
+
+        self.driver.find_element(By.XPATH, "//input[@id='password']").clear()
+        self.driver.find_element(By.XPATH, "//input[@id='password']").send_keys("wrong_pass")
+
+        LOGGER.info("Click login button")
+        self.driver.find_element(By.XPATH, "//input[@id='login-button']").click()
