@@ -7,7 +7,7 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
 
-from page_object_model.login.login import Login
+from page_object_model.login_page.login_page import LoginPage
 
 # logging.basicConfig(level=logging.INFO)
 LOGGER = logging.getLogger(__name__)
@@ -15,6 +15,7 @@ LOGGER = logging.getLogger(__name__)
 
 @pytest.fixture(scope="class")
 def driver(request):
+    # This fixture is called once per test class
     chrome_options = Options()
     chrome_options.add_argument("--disable-extensions")
     # chrome_options.add_argument("headless")
@@ -28,7 +29,7 @@ def driver(request):
     print(request.cls.driver)
     yield
     LOGGER.info("Closing chrome driver - once per class,  CONFTEST !!!!!!!!!!!!!!!!!!!")
-    print("\n Closing webdriver once pre class,  CONFTEST !!!!!!!!!!!!!!!!!!!")
+    print("\n Closing webdriver once per class,  CONFTEST !!!!!!!!!!!!!!!!!!!")
     print(request.cls.driver)
     my_driver.quit()
 
@@ -42,7 +43,7 @@ def scope_function_default():
 @pytest.fixture()
 def instantiate_pages(request, driver):
     LOGGER.info("Pages instatiated executed - default scope function CONFTEST !!!!!!!!!!!!!!!!!!!" )
-    login = Login(driver)
+    login = LoginPage(driver)
     request.cls.login = login
     yield
     LOGGER.info("Teardown test executed - default scope function CONFTEST !!!!!!!!!!!!!!!!!!!")
